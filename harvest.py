@@ -11,7 +11,6 @@ import settings
 from os import path
 from modules.interface import Interface
 from modules.download import FileFromWeb
-from modules.surfer import Surfer
 from modules.datasheet import CSVFile, GoogleSheet
 
 from collections import deque
@@ -103,7 +102,7 @@ def main():
 
     ui.info("Setting up virtual browser")
     try:
-        browser = Surfer()
+        browser = settings.Surfer()
         run_harvest(data_set, browser, uploader, ui)
     except Exception as e:
         ui.critical("%s: %s" % (type(e), e))

@@ -1,10 +1,41 @@
 #coding=utf-8
 import logging
-
 import urlparse
+from abc import ABCMeta, abstractmethod
+
+class Surfer(object):
+        """Abstract webbrowser. Subclasses implement webbrowsing functionality
+        using different backends.
+
+        """
+        __metaclass__ = ABCMeta
+
+        @abstractmethod
+	def __init__(self,delay=2):
+                pass
+
+        @abstractmethod
+	def surfTo(self,url):
+                pass
+
+        @abstractmethod
+	def clickOnStuff(self,xPath):
+                pass
+
+        @abstractmethod
+	def findElements(self,xPath):
+                pass
+
+        @abstractmethod
+	def getUrlList(self,xPath):
+                pass
+
+        @abstractmethod
+	def kill(self):
+                pass
 
 
-class Surfer:
+class SeleniumSurfer(Surfer):
     """This class does virtual web surfing on our demand
     """
 
