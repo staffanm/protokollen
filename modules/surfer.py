@@ -1,38 +1,42 @@
 #coding=utf-8
+
+from abc import ABCMeta, abstractmethod
 import logging
 import urlparse
-from abc import ABCMeta, abstractmethod
+
+import lxml
+
 
 class Surfer(object):
-        """Abstract webbrowser. Subclasses implement webbrowsing functionality
-        using different backends.
+    """Abstract webbrowser. Subclasses implement webbrowsing functionality
+    using different backends.
 
-        """
-        __metaclass__ = ABCMeta
+    """
+    __metaclass__ = ABCMeta
 
-        @abstractmethod
-	def __init__(self,delay=2):
-                pass
+    @abstractmethod
+    def __init__(self, delay=2):
+        pass
 
-        @abstractmethod
-	def surfTo(self,url):
-                pass
+    @abstractmethod
+    def surfTo(self, url):
+        pass
 
-        @abstractmethod
-	def clickOnStuff(self,xPath):
-                pass
+    @abstractmethod
+    def clickOnStuff(self, xPath):
+        pass
 
-        @abstractmethod
-	def findElements(self,xPath):
-                pass
+    @abstractmethod
+    def findElements(self, xPath):
+        pass
 
-        @abstractmethod
-	def getUrlList(self,xPath):
-                pass
+    @abstractmethod
+    def getUrlList(self, xPath):
+        pass
 
-        @abstractmethod
-	def kill(self):
-                pass
+    @abstractmethod
+    def kill(self):
+        pass
 
 
 class SeleniumSurfer(Surfer):
@@ -75,6 +79,29 @@ class SeleniumSurfer(Surfer):
     def kill(self):
         self.selenium_driver.close()
         self.vdisplay.stop()
+
+
+class RequestsSurfer(Surfer):
+    def __init__(self, delay=2):
+        import requests
+        self.r = requests
+
+    def surfTo(self,url):
+        raise NotImplementedError
+
+    def clickOnStuff(self,xPath):
+        raise NotImplementedError
+
+    def findElements(self,xPath):
+        raise NotImplementedError
+
+    def getUrlList(self,xPath):
+        raise NotImplementedError
+
+    def kill(self):
+        pass
+        
+
 
 
 class Url:

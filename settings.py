@@ -20,7 +20,7 @@ Storage = storage.S3Storage
  Storage = storage.DropboxUploader
  (and set the aws_* parameters in login.py accordingly)
 """
-Surfer = surfer.SeleniumSurfer
 
+# Surfer = surfer.SeleniumSurfer
 # To try the alternate, webbrowser-less surfer, try
-# Surfer = surfer.RequestsSurfer
+Surfer = surfer.RequestsSurfer
